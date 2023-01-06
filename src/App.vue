@@ -1,4 +1,5 @@
 <template>
+  <h2>Teste de deploy</h2>
   <nav>
     <router-link to="/login">Login</router-link> |
     <router-link to="/registrar">Registrar</router-link>
