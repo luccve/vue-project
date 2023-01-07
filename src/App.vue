@@ -1,16 +1,11 @@
 <template>
-  <h1>Teste de deploy</h1>
-  <h2>Divisao de projetos no git hub </h2>
-  <h2>vamos ver se funciona</h2>
-  <nav>
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/registrar">Registrar</router-link>
-  </nav>
+  <menuBar />
   <router-view />
+  <FooterBar />
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;0,900;1,300;1,400;1,700;1,800&display=swap');
+@import '@/css/variables.css';
 
 
 #app {
@@ -18,24 +13,55 @@
   min-height: 100vh;
   background:
     linear-gradient(rgba(98, 0, 196, 0.6), rgba(11, 47, 4, 0.6));
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #000000;
+  font-size: 22px;
 
 }
 
-nav {
-  padding: 30px;
+.templateView {
+  min-height: 80vh;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.navbar {
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: var(--text-color) !important;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.nav-link {
+  color: var(--text-color) !important;
+}
+
+.nav li a:hover {
+  color: var(--hover) !important;
+  transition-delay: 0.6ms;
+}
+
+.logo {
+  margin-right: 20px;
+}
+
+.icon {
+  height: 1.35rem;
+  margin: 0 15px 0 0px;
+  filter: invert(29%) sepia(6%) saturate(3997%) hue-rotate(184deg) brightness(101%) contrast(88%);
 }
 </style>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import menuBar from "@/components/menuBar.vue";
+import FooterBar from '@/components/FooterBar.vue';
+
+
+export default defineComponent({
+  name: "App",
+  components: {
+    menuBar,
+    FooterBar
+  }
+});
+</script>

@@ -1,7 +1,8 @@
 <template>
-    <div class="login">
+    <div class="login templateView">
         <div class="logo">
             <h2>Login</h2>
+
             <img src="@/assets/VERTICE.svg" alt="Logo da Vértice">
         </div>
         <br>

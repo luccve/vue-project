@@ -1,5 +1,5 @@
 <template>
-    <div class="sign-up">
+    <div class="sign-up templateView">
         <h1>Crie uma nova conta</h1>
         <input type="text" placeholder="E-mail">
         <br>
