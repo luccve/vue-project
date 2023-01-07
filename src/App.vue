@@ -11,24 +11,28 @@
 #app {
   min-width: 100vh;
   min-height: 100vh;
-  background:
-    linear-gradient(rgba(98, 0, 196, 0.6), rgba(11, 47, 4, 0.6));
+  /* background:
+    linear-gradient(rgba(98, 0, 196, 0.6), rgba(11, 47, 4, 0.6)); */
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-size: 22px;
+
+  overflow: hidden;
 
 }
 
 .templateView {
-  min-height: 80vh;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 .navbar {
   font-weight: 600;
   background-color: var(--primary-color);
   color: var(--text-color) !important;
+  font-size: 22px !important;
+
 }
 
 .nav-link {
@@ -48,6 +52,19 @@
   height: 1.35rem;
   margin: 0 15px 0 0px;
   filter: invert(29%) sepia(6%) saturate(3997%) hue-rotate(184deg) brightness(101%) contrast(88%);
+}
+
+@media (max-width:1526px) {
+  .navbar {
+    justify-items: center !important;
+    align-content: space-between !important;
+  }
+
+  .navbar ul {
+    display: none !important;
+
+
+  }
 }
 </style>
 
