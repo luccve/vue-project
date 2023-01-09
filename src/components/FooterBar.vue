@@ -28,7 +28,7 @@
                 <a @click.prevent="" href="#"><img class="icon" src="@/assets/whatsapp.svg"></a>
             </div>
             <div class="RODAPE">
-                <H3>©2023 Vertice | All Rights Reserved</H3>
+                <h3>©2023 Vertice | All Rights Reserved</h3>
             </div>
         </div>
     </div>
