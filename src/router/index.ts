@@ -6,17 +6,44 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Index",
+    props: true,
     component: () => import("@/views/index.vue"),
   },
   {
     path: "/login",
     name: "login-view",
+    props: true,
     component: () => import("../views/Login.vue"),
   },
   {
     path: "/registrar",
     name: "signup-view",
+    props: true,
     component: SignUp,
+  },
+  {
+    path: "/consultar",
+    name: "consultar",
+    props: true,
+    component: () => import("../views/Consultar.vue"),
+  },
+  {
+    path: "/about",
+    name: "about",
+    props: true,
+    component: () => import("../views/About.vue"),
+  },
+  {
+    path: "/calculadora",
+    name: "calculadora",
+    props: true,
+    component: () => import("../views/Calculadora.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "notFound",
+    props: true,
+    component: () => import("../views/notFound.vue"),
   },
 ];
 

@@ -1,9 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800;900&display=swap');
-    :root {
-        --font-family: "Raleway";
-        --primary-color: #FFB137;
-        --secondary-color: #40537D;
-        --text-color: #041D54;
-        --hover: #fafafa;
-        
-    }
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;800;900&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+.view {
+  display: flex;
+  background-color: var(--secondary-color);
+  align-items: center;
+  min-height: 50vh;
+  text-align: center;
+}
+:root {
+  --font-family: "Raleway";
+  --primary-color: #ffb137;
+  --secondary-color: #40537d;
+  --text-color: #041d54;
+  --hover: #fafafa;
+}
