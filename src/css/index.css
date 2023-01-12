@@ -7,6 +7,10 @@ body {
 
   box-sizing: border-box;
 }
+
+.bg-primary-color {
+  background-color: var(--primary-color) !important;
+}
 .view {
   display: flex;
   background-color: var(--secondary-color);
@@ -20,4 +24,5 @@ body {
   --secondary-color: #40537d;
   --text-color: #041d54;
   --hover: #fafafa;
+  --preto: #232529;
 }
