@@ -2,11 +2,11 @@
 
     <div v-if="theme == 'op'" class="square" :class="theme">
         <h4>{{ nameInput }} </h4>
-        <input type="text">
+        <input type="text" @change="handleBlur" v-model="inputData">
     </div>
     <div v-else class="calculadora">
         <h4>{{ nameInput }} </h4>
-        <input type="text" placeholder="R$|">
+        <input @input="handleBlur" v-model="ganhoTotal" type="text" placeholder="R$|">
     </div>
 
 </template>
@@ -19,19 +19,39 @@ export default defineComponent({
     props: {
         text: String,
         nameInput: String,
+        valueData: String,
         theme: {
             type: String,
             default: 'op',
             title2: 'op2',
         }
     },
+
     data() {
 
         return {
-            title: 'teste'
+            title: 'teste',
+            ganhoTotal: "",
+            inputData: ''
         }
     },
-    methods: {}
+    methods: {
+        handleBlur(e: { preventDefault: () => void; }) {
+            e.preventDefault;
+            this.$emit('GanhoTotal', this.ganhoTotal);
+
+        }
+    },
+    watch: {
+        ganhoTotal() {
+
+            if (this.ganhoTotal.length >= 2) {
+                this.ganhoTotal = this.ganhoTotal.replace(/\D/g, '');
+                this.ganhoTotal = this.ganhoTotal.replace(/(\d{1,2})$/, ',$1');
+                this.ganhoTotal = this.ganhoTotal.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            }
+        }
+    }
 
 
 })
@@ -54,7 +74,9 @@ h4 {
 }
 
 input {
-
+    font-size: 20px;
+    font-weight: bolder;
+    color: var(--text-color);
     border-radius: 4px;
     border: none;
     max-width: 400px;
@@ -74,17 +96,21 @@ input {
     padding-bottom: 20px;
 }
 
-.calculadora input::placeholder {
+.calculadora input::placeholder,
+.calculadora input:focus {
     font-size: 22px;
     font-weight: bolder;
     color: var(--text-color)
 }
+
 
 .calculadora h4 {
     color: var(--hover);
     text-align: left;
     font-weight: 800;
 }
+
+
 
 
 @media (max-width:477px) {

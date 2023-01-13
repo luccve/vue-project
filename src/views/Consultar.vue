@@ -18,7 +18,7 @@
 
                                 <div class="pai row m-auto">
                                     <div class="filho">
-                                        <Botao name="AGENDE UMA CONSULTA" url="#" theme="btn2" />
+                                        <Botao name="AGENDE UMA CONSULTA" url="about" theme="btn2" />
                                     </div>
                                 </div>
                             </div>
@@ -35,13 +35,15 @@
                 <div class="title">
                     <Title text="Consulta de situação cadastral CNPJ" theme="title2" />
                 </div>
-                <div class="input"><Input nameInput="CNPJ" /></div>
+                <div class="input">
+                    <Input nameInput="CNPJ" :valueData="inputData" />
+                </div>
                 <div class="recaptcha">
                     <Recaptcha />
                 </div>
                 <div class="botoes">
                     <Botao name="CONSULTAR" url="#" theme="consultar" />
-                    <Botao name="LIMPAR" url="#" theme="limpar" />
+                    <Botao @limpar="clear" name="LIMPAR" url="#" theme="limpar" />
                 </div>
 
 
@@ -70,10 +72,20 @@ export default defineComponent({
         Paragraph,
         Recaptcha
     },
+
     data() {
-        return {}
+        return { inputData: '', textClear: false }
     },
-    methods: {}
+    methods: {
+        clear() {
+            this.inputData = ' ';
+        },
+        dataInput(data: string) {
+            this.inputData = data;
+            console.log(this.inputData);
+        }
+    },
+
 
 
 })

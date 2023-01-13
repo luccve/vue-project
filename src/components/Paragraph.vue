@@ -1,8 +1,8 @@
 <template>
-
+    <br>
     <p class="card-text m-auto" :class="theme">{{ text }}
     </p>
-
+    <br>
 </template>
 <script lang="ts">
 
@@ -57,6 +57,11 @@ export default defineComponent({
     }
 
     .op2 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .op3 {
         font-size: 14px;
         font-weight: bold;
     }

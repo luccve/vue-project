@@ -2,34 +2,33 @@
     <div class="center">
         <button v-if="theme == 'consultar'" :class="theme" class="btn btn-primary">
             <div class="flex-d">
-                <router-link class="nav-link active" aria-current="page" href="#"
-                    :to="{ path: `${url}`, params: { url } }">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                    <p>{{ name }}</p>
-                </router-link>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                <p>{{ name }}</p>
+
             </div>
         </button>
 
 
-        <button v-else-if="theme == 'limpar'" :class="theme" class="btn btn-primary">
-            <router-link class="nav-link active" aria-current="page" href="#" :to="{ path: `${url}`, params: { url } }">
-                <div class="flex-d">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-                    </svg>
-                    <p>{{ name }}</p>
-                </div>
-            </router-link>
+        <button v-else-if="theme == 'limpar'" :class="theme" class="btn btn-primary" @click.prevent="handleClick">
+
+            <div class="flex-d">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                </svg>
+                <p>{{ name }}</p>
+            </div>
+
         </button>
 
         <button v-else :class="theme" class="btn btn-primary">
-            <router-link class="nav-link active" aria-current="page" href="#" :to="{ path: `${url}`, params: { url } }">
+            <router-link class="nav-link active" aria-current="page" :to="{ path: `${url}` }">
                 <p>{{ name }}</p>
             </router-link>
         </button>
@@ -55,7 +54,12 @@ export default defineComponent({
     data() {
         return {}
     },
-    methods: {}
+    methods: {
+        handleClick() {
+
+            this.$emit('limpar');
+        }
+    }
 
 
 })

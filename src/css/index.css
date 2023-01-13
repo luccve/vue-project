@@ -11,6 +11,10 @@ body {
 .bg-primary-color {
   background-color: var(--primary-color) !important;
 }
+.bg-seconday-color {
+  background-color: var(--text-color) !important;
+}
+
 .view {
   display: flex;
   background-color: var(--secondary-color);
