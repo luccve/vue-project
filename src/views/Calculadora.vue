@@ -1,6 +1,6 @@
 <template>
     <section class="view bg-primary-color" style="flex-direction: column; justify-content: space-between">
-        <div class="container calculate">
+        <div class="container calculate space-content">
             <Title text="Método 50-30-20" theme="title2" />
             <Paragraph
                 text="Conheça o método 50-30-20 e aprenda como utilizá-lo para manter sua vida financeira saudável."
@@ -65,8 +65,8 @@
             </div>
         </div>
     </section>
-    <section class="view" style="flex-direction: column; justify-content: space-between">
-        <div class="container bg-seconday-color"
+    <section class="view bg-seconday-color" style="flex-direction: column; justify-content: space-between">
+        <div class="container bg-third-color"
             style="margin-top: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
             <Title text="Calculadora 50/30/20" />
             <Paragraph
@@ -170,8 +170,22 @@ export default defineComponent({
     font-size: 15px;
     font-weight: 600;
 
+}
+
+strong {
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.accordion-button {
+    background-color: var(--secondary-color);
+    color: var(--hover);
+    font-size: 22px;
+    font-weight: 600;
 
 }
+
+
 
 .customTable {
     width: 60vw;
@@ -187,5 +201,11 @@ thead tr th {
     border-radius: 2rem 0rem 2rem 0rem;
 
 
+}
+
+@media (max-width: 576px) {
+    .bg-third-color {
+        background-color: var(--text-color) !important;
+    }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <main>
         <section class="view">
-            <div class="container">
+            <div class="container space-content">
                 <div class="row m-auto ">
                     <div class="col-sm-12 col-md-6 m-auto">
                         <div class="lead m-auto">
@@ -38,25 +38,14 @@
                 </div>
             </div>
         </section>
-        <section class="view background d-flex">
-            <div class="container ">
-                <div class="row m-auto d-flex align-items-center">
-                    <div class="col-sm-6 col-md-8 m-auto">
-                        <div class="row m-auto"></div>
-                        <div class="col-md-10 m-auto">
-                            <Title text="Solução baseada em IA para alavancar oportunidades de crescimento de
-                                receita." />
-                        </div>
-                        <div class="col-md-2 m-auto">
-                            <Botao name="Quem somos?" url="about" />
+        <section class="view background">
 
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 m-auto">
-                        <img class="d-block w-100" src="@/assets/macbook.png" alt="Site em um pc">
-                    </div>
-                </div>
+            <div class="title">
+                <Title text="Solução baseada em IA para alavancar oportunidades de crescimento de
+                            receita." />
+            </div>
+            <div class="mopock">
+                <router-link to="/about"> <img src="@/assets/macbook.png" alt="Site em um pc"></router-link>
             </div>
         </section>
     </main>
@@ -64,7 +53,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Botao from '@/components/Botao.vue'
+
 import Title from '@/components/Title.vue'
 
 export default defineComponent({
@@ -72,7 +61,7 @@ export default defineComponent({
 
     name: 'Index',
     components: {
-        Botao,
+
         Title
     },
 
@@ -82,11 +71,29 @@ export default defineComponent({
 
 
 <style scoped>
+.mopock {
+    padding: 2rem;
+    display: inline;
+}
+
+
+.mopock img:hover {
+    cursor: pointer;
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.texto-f {
+    font-size: 22px;
+    font-weight: 600;
+}
+
 .background {
     background-image: url(@/assets/unplash.png);
     background-size: cover;
     background-position: center;
-
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -102,7 +109,17 @@ export default defineComponent({
     /* you can use % */
     height: 300px;
     object-fit: contain;
-    border-radius: 14px;
+    border-radius: 2rem;
+    overflow: hidden;
+
+}
+
+.mopock img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+
 }
 
 .lead {
@@ -138,14 +155,76 @@ export default defineComponent({
 }
 
 
-.icone2 {
-
-    height: 100px;
+@media(max-width: 768px) {
+    .mopock {
+        display: flex !important;
+        margin: 0 auto !important;
+    }
 }
 
 @media(max-width: 574.98px) {
     .row {
         flex-direction: column;
+    }
+
+    #carouselExampleSlidesOnly {
+        width: fit-content;
+        display: flex;
+        position: relative !important;
+        left: -30% !important;
+
+        align-content: flex-start !important;
+
+    }
+
+    #carouselExampleSlidesOnly img {
+        width: fit-content !important;
+    }
+}
+
+@media(max-width: 500.98px) {
+    .row {
+        flex-direction: column;
+    }
+
+    #carouselExampleSlidesOnly {
+        width: fit-content;
+        display: flex;
+        position: relative !important;
+        left: -39% !important;
+
+        align-content: flex-start !important;
+
+    }
+
+    #carouselExampleSlidesOnly img {
+        width: fit-content !important;
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 695px) {
+    .background {
+        display: block;
+        padding: 2rem;
+    }
+
+    .title {
+        font-size: 32px;
+
+    }
+
+    .mopock {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .mopock img {
+        width: auto;
+        height: fit-content;
+
     }
 }
 </style>

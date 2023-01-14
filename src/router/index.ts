@@ -40,6 +40,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/Calculadora.vue"),
   },
   {
+    path: "/painel",
+    name: "Painel",
+    props: true,
+    component: () => import("../views/Painel.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "notFound",
     props: true,

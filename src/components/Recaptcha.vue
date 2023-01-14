@@ -14,22 +14,30 @@ export default defineComponent({
     },
     setup() {
         const siteKey = computed(() => {
-            return '6LdsFO4jAAAAAFZvRkDyP90O3lfX1h-bOdg7tC04';
+            return process.env.VUE_APP_KEY_SITE_RECAPTCHA;
         });
 
         const handleError = () => {
             // Do some validation
         };
 
-        const handleSuccess = (response: string) => {
-            console.log(response);
-        };
 
         return {
-            handleSuccess,
+
             handleError,
             siteKey,
         };
+    },
+    methods: {
+        handleSuccess(response: string) {
+            const secret = process.env.VUE_APP_KEY_SERVER_RECAPTCHA;
+            const body = "secret=" + secret + "&response=" + response;
+
+            fetch('https://www.google.com/recaptcha/api/siteverify', { method: 'POST', mode: "no-cors", headers: { 'Content-Type': 'application/json' }, body: body })
+                .then((responseBack) => responseBack.json()).then((response) => console.log(response));
+
+            this.$emit('success', response);
+        }
     }
 });
 </script>

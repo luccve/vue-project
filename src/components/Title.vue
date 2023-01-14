@@ -43,15 +43,17 @@ export default defineComponent({
     font-weight: 600;
 }
 
-@media (max-width:567px) {
+@media (max-width:651px) {
     .title2 {
         font-size: 22px;
         font-weight: bold;
+        padding: 1rem;
     }
 
     .title {
         font-size: 22px;
         font-weight: bold;
+        padding: 1rem;
     }
 }
 </style>

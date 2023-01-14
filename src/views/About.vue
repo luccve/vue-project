@@ -1,7 +1,7 @@
 <template>
     <section class="view background">
 
-        <div class="container">
+        <div class="container space-content">
             <div class="row m-auto">
                 <div class="col-12 m-auto">
                     <div class="bg-text m-auto">
@@ -104,7 +104,7 @@ export default defineComponent({
 
 .bg-text {
     background-color: var(--primary-color);
-    border-radius: 2px;
+    border-radius: 1rem;
     color: var(--text-color);
     font-weight: bold;
     box-shadow: 2px;

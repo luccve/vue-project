@@ -2,7 +2,7 @@
 
     <div v-if="theme == 'op'" class="square" :class="theme">
         <h4>{{ nameInput }} </h4>
-        <input type="text" @change="handleBlur" v-model="inputData">
+        <input type="text" @input="entryValue" v-model="inputData" maxlength="15">
     </div>
     <div v-else class="calculadora">
         <h4>{{ nameInput }} </h4>
@@ -32,7 +32,8 @@ export default defineComponent({
         return {
             title: 'teste',
             ganhoTotal: "",
-            inputData: ''
+            inputData: '',
+
         }
     },
     methods: {
@@ -40,8 +41,15 @@ export default defineComponent({
             e.preventDefault;
             this.$emit('GanhoTotal', this.ganhoTotal);
 
-        }
+        },
+
+        entryValue(e: { preventDefault: () => void; }) {
+            e.preventDefault;
+            this.$emit('dataValue', this.inputData);
+
+        },
     },
+
     watch: {
         ganhoTotal() {
 
@@ -50,6 +58,11 @@ export default defineComponent({
                 this.ganhoTotal = this.ganhoTotal.replace(/(\d{1,2})$/, ',$1');
                 this.ganhoTotal = this.ganhoTotal.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
             }
+        },
+        inputData() {
+            this.inputData = this.inputData.replace(/\D/g, '');
+            this.inputData = this.inputData.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5")
+
         }
     }
 
@@ -63,7 +76,7 @@ export default defineComponent({
     flex-direction: column;
     border: none;
     height: auto;
-    width: 200px;
+    width: max-content;
     padding-bottom: 20px;
 }
 
@@ -79,7 +92,7 @@ input {
     color: var(--text-color);
     border-radius: 4px;
     border: none;
-    max-width: 400px;
+
     height: 40px;
     box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.3);

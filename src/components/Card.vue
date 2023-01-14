@@ -16,7 +16,7 @@
                         <br>
 
                         <br>
-                        <div class="row">
+                        <div class="row setCenter">
                             <Botao :name="btnName" :url="url" :theme="theme" />
                         </div>
 
@@ -57,6 +57,11 @@ export default defineComponent({
 })
 </script>
 <style scoped>
+.setCenter {
+    display: flex;
+    justify-content: center;
+}
+
 p {
     font-size: 14px;
     text-align: center;
@@ -78,8 +83,8 @@ h5 {
 }
 
 p {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 17px;
+    font-weight: 500;
     color: var(--text-color);
 }
 
