@@ -1,16 +1,29 @@
 <template>
     <div class="view">
-        <h1>Ola sou o painel</h1>
+        <h1>Ola sou {{ name }}</h1>
+        <img :src="photoUser" alt="">
+        <h4>Perfil photo</h4>
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 export default defineComponent({
     name: 'Painel',
-    setup() {
-        return {}
-    }
+
+    data() {
+        let name = ref();
+        let photoUser = "";
+
+        onMounted(() => {
+            this.photoUser = localStorage.phoURL
+            this.name = localStorage.nameUser.replace('""', '')
+        })
+
+        return { name, photoUser }
+    },
+
+
 })
 
 </script>

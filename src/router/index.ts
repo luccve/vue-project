@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 import SignUp from "../views/SignUp.vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -44,6 +45,9 @@ const routes: Array<RouteRecordRaw> = [
     name: "Painel",
     props: true,
     component: () => import("../views/Painel.vue"),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/:pathMatch(.*)*",
@@ -56,6 +60,32 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const removeListener = onAuthStateChanged(
+      getAuth(),
+      (user) => {
+        removeListener();
+        resolve(user);
+      },
+      reject
+    );
+  });
+};
+
+router.beforeEach(async (to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (await getCurrentUser()) {
+      next();
+    } else {
+      alert("Você precisa estar logado!");
+      next("/Login");
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

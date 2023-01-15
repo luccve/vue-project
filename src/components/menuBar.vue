@@ -33,11 +33,32 @@
             </nav>
 
             <div class="icones">
-                <a v-if="theme" @click.prevent="changeIcon()" href="#"><img class="icon"
-                        src="@/assets/brightness-high-fill.svg"></a>
-                <a v-else @click.prevent="changeIcon()" href="#"><img class="icon2" src="@/assets/moon-fill.svg"></a>
-                <router-link to="/painel"><a href="#"><img class='icon'
-                            src="@/assets/person-gear.svg"></a></router-link>
+
+                <div>
+                    <a v-if="theme" @click.prevent="changeIcon()" href="#"><img class="icon"
+                            src="@/assets/brightness-high-fill.svg"></a>
+                    <a v-else @click.prevent="changeIcon()" href="#"><img class="icon2"
+                            src="@/assets/moon-fill.svg"></a>
+                    <a @click.prevent="togleTrigger()" href="#"><img class='icon' src="@/assets/person-gear.svg"></a>
+                </div>
+
+                <ul @click.prevent="togleTrigger()" id="dropdown-list" v-if="dropdown">
+
+                    <li v-if="isLoggedIn">
+                        <router-link @click="handleSignOut" to="/Login">Logout</router-link>
+                    </li>
+                    <li v-else>
+                        <router-link to="/Login">Login</router-link>
+                    </li>
+                    <hr>
+                    <li v-if="!isLoggedIn">
+                        <router-link to="/registrar">Registrar</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/Painel">Painel</router-link>
+                    </li>
+                </ul>
+
             </div>
         </div>
 
@@ -47,25 +68,38 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
+import router from "@/router";
+import { useRouter } from "vue-router";
+
 
 export default defineComponent({
     name: "menuBar",
     data() {
-
+        const isLoggedIn = ref(false);
         const theme = localStorage.theme == 'true' ? true : false;
         const width_window = window.innerWidth;
-
+        const router = useRouter();
         return {
             display: true,
             menubarra: false,
             theme,
-            width_window
+            width_window,
+            isLoggedIn,
+            dropdown: false,
+            router
 
         }
     },
-    methods: {
 
+    methods: {
+        handleSignOut() {
+            let auth = getAuth();
+            signOut(auth).then(() => {
+                router.push("/Login");
+            })
+        },
         changeIcon() {
 
 
@@ -75,7 +109,11 @@ export default defineComponent({
             window.innerWidth > 1540 ? this.display = true : this.display = false;
             window.innerWidth < 1540 ? this.menubarra = true : this.menubarra = false;
             this.width_window = window.innerWidth;
+        },
+        togleTrigger() {
+            this.dropdown = !this.dropdown;
         }
+
     },
     created() {
         window.addEventListener("resize", this.onResize)
@@ -91,6 +129,18 @@ export default defineComponent({
 
     },
     mounted() {
+        let auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            user ? this.isLoggedIn = true : this.isLoggedIn = false;
+            if (user?.displayName == null) {
+                localStorage.setItem('nameUser', JSON.stringify(user?.email))
+            } else {
+                localStorage.setItem('nameUser', JSON.stringify(user?.displayName))
+                localStorage.setItem('phoURL', JSON.stringify(user?.photoURL))
+            }
+            console.log(user?.photoURL)
+
+        })
         if (!localStorage.theme) {
             localStorage.setItem('theme', this.theme.toString())
         }
@@ -117,10 +167,11 @@ header {
 
 .menu {
     width: max-content;
-    height: 8vh;
+    height: 5rem;
     margin: 0 auto;
     display: flex;
     padding: 0.5rem;
+    align-items: center;
 }
 
 .menu .menu-itens input {
@@ -133,17 +184,52 @@ header {
 
 }
 
+.menu .icones {
+    display: relative;
+
+}
+
+
+
+#dropdown-list {
+    width: 150px;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    position: absolute;
+    flex-direction: column;
+    z-index: 20000;
+    top: 100%;
+    left: 67%;
+    background-color: var(--primary-color);
+    transition: all ease-in-out .22ms;
+}
+
+
+
+.menu .icones ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+
+}
+
+
+.menu .icones ul li a:hover {
+    color: var(--hover);
+    font-size: 24px;
+}
+
 
 ul,
 li {
-    display: inline-block;
-    text-decoration: none;
+    display: inline-block !important;
+    text-decoration: none !important;
     list-style: none;
-    font-size: 22px;
+    font-size: 22px !important;
     color: var(--text-color);
     font-weight: 700;
     margin: 0 auto;
-
 
 }
 
@@ -153,7 +239,7 @@ li:hover {
 }
 
 
-.icones img {
+.menu .icones img {
     height: 40px;
     padding: 0.3rem;
     filter: invert(12%) sepia(62%) saturate(1653%) hue-rotate(200deg) brightness(94%) contrast(109%);
@@ -165,14 +251,36 @@ li:hover {
 
 .icones img:hover {
     filter: invert(12%) sepia(2%) saturate(1653%) hue-rotate(200deg) brightness(94%) contrast(1209%);
-
+    height: 60px;
 }
 
 .icon2 {
     filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(100deg) brightness(100%) contrast(103%) !important;
 }
 
+
+@media(max-width: 1715px) {
+    #dropdown-list {
+        top: 100%;
+        left: 72%;
+    }
+}
+
+@media(max-width: 1507px) {
+    #dropdown-list {
+        top: 100%;
+        left: 77%;
+    }
+}
+
 @media (max-width: 974px) {
+
+
+    #dropdown-list {
+        left: 0%;
+    }
+
+
     .menu .menu-itens .menu-faketrigger {
         display: block;
     }
@@ -187,6 +295,9 @@ li:hover {
         left: 50%;
     }
 
+    #dropdown-list li a {
+        font-size: 1rem;
+    }
 
 
     .menu .menu-faketrigger:checked~.menu-lines span:nth-child(1) {
@@ -279,6 +390,18 @@ li:hover {
 
 
 }
+
+@media (max-width: 413px) {
+
+
+    #dropdown-list {
+        left: -10%;
+        width: 130px;
+    }
+
+
+}
+
 
 @media (max-width: 288px) {
     .menu .logo {
