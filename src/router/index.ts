@@ -41,7 +41,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/Calculadora.vue"),
   },
   {
-    path: "/painel",
+    path: "/painel/:id",
+    alias: "/Painel/:id",
     name: "Painel",
     props: true,
     component: () => import("../views/Painel.vue"),

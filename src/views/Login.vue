@@ -103,7 +103,7 @@ export default defineComponent({
             // eslint-disable-next-line 
             signInWithPopup(getAuth(), provider).then((result) => {
 
-                router.push('/Painel');
+                router.push(`/Painel/${result.user.uid}`);
             }).catch((error) => {
                 alert(error.message)
             });

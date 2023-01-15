@@ -55,7 +55,7 @@
                         <router-link to="/registrar">Registrar</router-link>
                     </li>
                     <li>
-                        <router-link to="/Painel">Painel</router-link>
+                        <router-link :to="`/Painel/${uuid}`">Painel</router-link>
                     </li>
                 </ul>
 
@@ -81,6 +81,7 @@ export default defineComponent({
         const theme = localStorage.theme == 'true' ? true : false;
         const width_window = window.innerWidth;
         const router = useRouter();
+        const uuid = ref("");
         return {
             display: true,
             menubarra: false,
@@ -88,7 +89,7 @@ export default defineComponent({
             width_window,
             isLoggedIn,
             dropdown: false,
-            router
+            router, uuid
 
         }
     },
@@ -132,6 +133,7 @@ export default defineComponent({
         let auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             user ? this.isLoggedIn = true : this.isLoggedIn = false;
+            this.uuid = `${user?.uid}`
             if (user?.displayName == null) {
                 localStorage.setItem('nameUser', JSON.stringify(user?.email))
             } else {

@@ -51,18 +51,18 @@ export default defineComponent({
                 // eslint-disable-next-line
                 .then((data) => {
                     alert("Successfully registered!")
-                    console.log(this.email, this.password, data)
+
                     router.push('/painel')
                 }).catch((error) => {
-                    console.log(error.code);
+                    // console.log(error.code);
                     alert(error.message);
                 })
         },
         signInWithGoogle() {
             const provider = new GoogleAuthProvider();
             signInWithPopup(getAuth(), provider).then((result) => {
-                console.log(result.user);
-                router.push('/Painel');
+
+                router.push(`/Painel/${result.user.uid}`);
             }).catch((error) => {
                 alert(error.message)
             });
