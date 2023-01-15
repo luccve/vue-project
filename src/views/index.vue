@@ -154,6 +154,10 @@ export default defineComponent({
     color: var(--secondary-color)
 }
 
+.background .title {
+    padding: 2rem;
+}
+
 
 @media(max-width: 768px) {
     .mopock {
@@ -204,6 +208,11 @@ export default defineComponent({
 }
 
 @media (max-width: 695px) {
+
+    .background .title {
+        padding: 0;
+    }
+
     .background {
         display: block;
         padding: 2rem;
