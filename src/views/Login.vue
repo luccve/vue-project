@@ -1,4 +1,5 @@
 <template>
+    <MenuBar />
     <div class="templateView">
         <div class="login space-content">
             <div class="logo ">
@@ -34,6 +35,7 @@
 
         </div>
     </div>
+    <FooterBar />
 </template>
 
 <script lang="ts">
@@ -41,6 +43,9 @@ import { defineComponent, ref } from 'vue';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import router from '@/router';
 import { useRouter } from 'vue-router';
+import MenuBar from '@/components/menuBar.vue';
+import FooterBar from '@/components/FooterBar.vue';
+
 
 export default defineComponent({
 
@@ -58,6 +63,11 @@ export default defineComponent({
         function validateEmail() {
             return
         }
+    },
+    components: {
+
+        MenuBar,
+        FooterBar
     },
 
     methods: {
@@ -78,7 +88,7 @@ export default defineComponent({
                 .then((data) => {
                     console.log(data);
                     alert("Conta logada!")
-                    router.push('/painel')
+                    router.push(`/Painel/${data.user.uid}`)
                 }).catch((error) => {
                     console.log(error.code);
                     switch (error.code) {

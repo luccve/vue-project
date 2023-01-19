@@ -4,6 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes: Array<RouteRecordRaw> = [
+  { path: "/home", redirect: "/" },
   {
     path: "/",
     name: "Index",

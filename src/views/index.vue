@@ -1,5 +1,7 @@
 <template>
+    <menuBar />
     <main>
+
         <section class="view">
             <div class="container space-content">
                 <div class="row m-auto ">
@@ -42,17 +44,20 @@
 
             <div class="title">
                 <Title text="Solução baseada em IA para alavancar oportunidades de crescimento de
-                            receita." />
+                    receita." />
             </div>
             <div class="mopock">
                 <router-link to="/about"> <img src="@/assets/macbook.png" alt="Site em um pc"></router-link>
             </div>
         </section>
     </main>
+    <FooterBar />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import menuBar from "@/components/menuBar.vue";
+import FooterBar from '@/components/FooterBar.vue';
 
 import Title from '@/components/Title.vue'
 
@@ -61,7 +66,8 @@ export default defineComponent({
 
     name: 'Index',
     components: {
-
+        FooterBar,
+        menuBar,
         Title
     },
 

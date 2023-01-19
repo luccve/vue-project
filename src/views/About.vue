@@ -1,4 +1,5 @@
 <template>
+    <MenuBar />
     <section class="view background">
 
         <div class="container space-content">
@@ -44,18 +45,22 @@
         </div>
 
     </section>
+    <FooterBar />
 </template>
 <script lang="ts">
 
 import { defineComponent } from 'vue';
 import Title from '@/components/Title.vue';
 import Card from '@/components/Card.vue';
+import MenuBar from '@/components/menuBar.vue';
+import FooterBar from '@/components/FooterBar.vue';
 
 export default defineComponent({
     name: 'about',
     components: {
         Title,
-        Card,
+        Card, MenuBar,
+        FooterBar
 
     },
     data() {

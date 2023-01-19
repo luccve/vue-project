@@ -1,4 +1,5 @@
 <template>
+    <MenuBar />
     <section class="view bg-primary-color" style="flex-direction: column; justify-content: space-between">
         <div class="container calculate space-content">
             <Title text="Método 50-30-20" theme="title2" />
@@ -66,7 +67,7 @@
         </div>
     </section>
     <section class="view bg-seconday-color" style="flex-direction: column; justify-content: space-between">
-        <div class="container bg-third-color"
+        <div class=" bg-third-color"
             style="margin-top: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
             <Title text="Calculadora 50/30/20" />
             <Paragraph
@@ -106,6 +107,7 @@
 
         </div>
     </section>
+    <FooterBar />
 </template>
 <script lang="ts">
 
@@ -113,10 +115,15 @@ import { defineComponent } from 'vue';
 import Title from '@/components/Title.vue';
 import Paragraph from '@/components/Paragraph.vue';
 import Input from '@/components/Input.vue';
+import MenuBar from '@/components/menuBar.vue';
+import FooterBar from '@/components/FooterBar.vue';
 
 export default defineComponent({
     name: 'calculadora',
-    components: { Title, Paragraph, Input },
+    components: {
+        Title, Paragraph, Input, MenuBar,
+        FooterBar
+    },
     data() {
         let inputData = "";
         let value50 = '';

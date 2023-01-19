@@ -1,7 +1,7 @@
 <template>
-  <menuBar />
+
   <router-view />
-  <FooterBar />
+
 </template>
 
 <style>
@@ -25,15 +25,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import menuBar from "@/components/menuBar.vue";
-import FooterBar from '@/components/FooterBar.vue';
+
 
 
 export default defineComponent({
   name: "App",
   components: {
-    menuBar,
-    FooterBar
+
   }
 });
 </script>

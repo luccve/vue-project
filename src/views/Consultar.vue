@@ -1,4 +1,5 @@
 <template>
+    <MenuBar />
     <section>
         <div class="view background1 ">
             <div class="container space-content">
@@ -58,6 +59,7 @@
             </div>
         </div>
     </section>
+    <FooterBar />
 </template>
 <script lang="ts">
 
@@ -69,6 +71,8 @@ import Paragraph from '@/components/Paragraph.vue';
 import Input from '@/components/Input.vue';
 import Recaptcha from '@/components/Recaptcha.vue';
 import { apiCNPJ } from '@/services/api';
+import MenuBar from '@/components/menuBar.vue';
+import FooterBar from '@/components/FooterBar.vue';
 
 
 export default defineComponent({
@@ -78,7 +82,9 @@ export default defineComponent({
         Botao,
         Title,
         Paragraph,
-        Recaptcha
+        Recaptcha,
+        MenuBar,
+        FooterBar
     },
 
     data() {

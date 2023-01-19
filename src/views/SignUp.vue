@@ -1,4 +1,5 @@
 <template>
+    <MenuBar />
     <section id='templateView'>
         <div id="sign-up">
             <form action="">
@@ -19,6 +20,7 @@
             </form>
         </div>
     </section>
+    <FooterBar />
 </template>
 
 <script lang="ts">
@@ -27,9 +29,17 @@ import { ref } from "vue";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import router from '@/router';
 import { useRouter } from 'vue-router';
+import MenuBar from '@/components/menuBar.vue';
+import FooterBar from '@/components/FooterBar.vue';
+import { insertUser } from '@/services/api';
 
 export default defineComponent({
     name: 'signup-view',
+    components: {
+
+        MenuBar,
+        FooterBar
+    },
 
 
     data() {
@@ -47,12 +57,20 @@ export default defineComponent({
     methods: {
         register() {
             console.log(this.email);
-            createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+            createUserWithEmailAndPassword(getAuth(), this.email.trim(), this.password)
                 // eslint-disable-next-line
                 .then((data) => {
                     alert("Successfully registered!")
-
-                    router.push('/painel')
+                    insertUser(
+                        {
+                            displayName: data.user.displayName,
+                            email: data.user.email,
+                            photoURL: data.user.photoURL,
+                            sexo: "",
+                            uid: data.user.uid,
+                        }
+                    )
+                    router.push(`/Painel/${data.user.uid}`);
                 }).catch((error) => {
                     // console.log(error.code);
                     alert(error.message);
