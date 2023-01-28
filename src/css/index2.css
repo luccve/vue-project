@@ -32,8 +32,8 @@ body {
 }
 :root {
   --font-family: "Raleway";
-  --primary-color: #ffb137;
-  --secondary-color: #40537d;
+  --primary-color: #40537d;
+  --secondary-color: #ffb137;
   --text-color: #041d54;
   --hover: #fafafa;
   --preto: #232529;

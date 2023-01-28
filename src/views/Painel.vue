@@ -3,7 +3,7 @@
 
         <nav id="nav">
             <div class="circulo">
-                <img src="https://source.unsplash.com/random/151x151/" />
+                <img :src="photoUser" />
             </div>
 
             <ul>
@@ -28,7 +28,7 @@
             </ul>
         </nav>
 
-        <section>
+        <section id="body">
             <div v-if="div_change === 'perfil'">
 
                 <Perfil />
@@ -53,9 +53,10 @@
 import Crud from '@/components/Crud.vue';
 import Dashboard from '@/components/Dashboard.vue';
 import Perfil from '@/components/Perfil.vue';
-import { defineComponent, onMounted, ref } from 'vue';
-import { transaction, getAllTransaction } from '@/services/api';
+import { defineComponent, ref } from 'vue';
+import { getUser } from '@/services/api';
 import { getAuth } from '@firebase/auth';
+
 
 export default defineComponent({
     name: 'Painel',
@@ -84,9 +85,18 @@ export default defineComponent({
         this.photoUser = localStorage.phoURL
         this.name = localStorage.nameUser.replace('""', '')
 
-        getAuth().onAuthStateChanged(user => {
+        getAuth().onAuthStateChanged(async user => {
             this.user_uid = `${user?.uid}`;
-            console.log(this.user_uid)
+            const dados = await getUser(user?.uid);
+            if (dados[0].photo) {
+
+                this.photoUser = dados[0].photo;
+            }
+            else {
+
+                this.photoUser = `https://source.unsplash.com/random/151x151/`;
+            }
+
         })
 
     }
@@ -98,106 +108,85 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.circulo {
-    width: 60px;
-    height: 60px;
+#nav .circulo img {
+    margin-top: 30px;
+    width: 80%;
     border-radius: 50%;
-    overflow: hidden;
-    float: left;
-    margin: 15px;
-    transition: 0.3s ease;
-    position: absolute;
-    top: 10%;
-    left: 35%;
-    transform: translate(-50%, -50%);
 }
 
-.circulo img {
-    width: 100%;
-    max-width: 60px;
-    height: auto;
-}
-
-
-ul,
-li,
 a {
-    text-decoration: none;
-    list-style: none;
-    color: var(--text-color);
-    transition: all ease-in-out .22s;
     cursor: pointer;
 
 }
 
 
 
+
+
 #nav ul li a:hover {
+
     color: var(--hover);
+
+
+    font-weight: 700;
+    height: 60px;
+
+}
+
+#nav ul li a:active {
+
+    color: var(--hover);
+
+
     font-weight: 700;
     height: 60px;
 
 }
 
 
-#nav {
-
-    height: 100%;
-    width: 12vw;
-    background-color: var(--secondary-color);
-    position: relative;
-
-}
-
-#nav ul {
-    text-align: left;
-    height: 30vh;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-}
-
-#nav ul li {
-    margin: 2rem 0 0 0;
+a,
+ul,
+li {
+    list-style: none;
+    text-decoration: none;
 }
 
 .templateView {
-    height: 100vh;
-    width: 100vw;
     display: flex;
     flex-direction: row;
-    position: relative;
-
-}
-
-section div {
+    width: 100vw;
     height: 100vh;
-    width: 88vw;
-    position: relative;
-    display: block;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--primary-color);
+    background-color: var(--text-color);
 }
 
-@media (min-width: 755px) {
-    #nav {
-        width: 5vw !important;
-    }
+#nav ul {
+    position: absolute;
+    left: -30%;
+    top: 30%;
 
-    section div {
-        height: 100vh;
-        width: 95vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--primary-color);
-    }
+}
+
+#nav ul li {
+    padding: 5px 0 10px 0;
+}
+
+#nav {
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    height: 100vh;
+    width: 60px;
+    background-color: var(--primary-color);
+
+}
+
+#body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 0 60px;
+    min-height: 100%;
+    min-width: 100%;
+    background-color: var(--secondary-color);
 }
 </style>

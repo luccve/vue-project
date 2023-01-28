@@ -52,7 +52,7 @@
         </div>
         <div v-show="Empresa" class="grade">
             <div class="cnpjNames" v-for="(item, index ) in cnpjData" :key="index">
-                <h1>NOME FANTASIA: {{ item.fantasia }}</h1>
+                <h1>NOME FANTASIA: {{ item.nome }}</h1>
                 <h1>DATA DE ABERTURA: {{ item.abertura }}</h1>
                 <h1>CIDADE: {{ item.municipio }}</h1>
                 <h1>CNPJ: {{ item.cnpj }}</h1>
@@ -95,6 +95,7 @@ export default defineComponent({
                 atividade_principal: String,
                 cnpj: String,
                 municipio: String,
+                nome: String
             }];
         return { inputData: '', textClear: false, cnpjData, Empresa: false, status: '', Recaptcha: false }
     },
@@ -115,6 +116,7 @@ export default defineComponent({
             } else {
 
                 this.cnpjData[0].fantasia = object.fantasia;
+                this.cnpjData[0].nome = object.nome;
                 this.cnpjData[0].abertura = object.abertura;
                 this.cnpjData[0].atividade_principal = object.atividade_principal;
                 this.cnpjData[0].cnpj = object.cnpj;

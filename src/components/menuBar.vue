@@ -103,8 +103,8 @@ export default defineComponent({
         },
         changeIcon() {
 
-
             this.theme = localStorage.getItem('theme') == 'true' ? false : true;
+            router.go(0)
         },
         onResize() {
             window.innerWidth > 1540 ? this.display = true : this.display = false;

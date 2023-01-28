@@ -75,3 +75,44 @@ export async function getAllTransaction(uid: string | undefined) {
   const object = await data.json();
   return object;
 }
+
+export async function getUser(uid: string | undefined) {
+  const data = await fetch(
+    `${process.env.VUE_APP_HOST_VERTICE_BACK_END}/getUser?uid=${uid}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  const object = await data.json();
+  return object;
+}
+
+export async function putUser(body: any) {
+  const data = await fetch(
+    `${process.env.VUE_APP_HOST_VERTICE_BACK_END}/user`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }
+  );
+  const object = await data.json();
+  return object;
+}
+
+export async function predictAprove(
+  incoming: number,
+  age: number,
+  loan: number
+) {
+  const data = await fetch(
+    `${process.env.VUE_APP_HOST_VERTICE_PERSISTENCIA}/predict?income=${incoming}&age=${age}&loan=${loan}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  const object = await data.json();
+  return object;
+}

@@ -24,14 +24,39 @@
 </style>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onBeforeMount } from "vue";
+
 
 
 
 export default defineComponent({
   name: "App",
-  components: {
 
+  components: {
+    // eslint-disable-next-line
+
+  }
+  , methods: {
+
+  }
+  ,
+
+  setup() {
+    let load = localStorage.theme == 'true' ? true : false;
+
+    onBeforeMount(() => {
+
+      if (load) {
+        document.documentElement.style.setProperty('--primary-color', '#ffb137');
+        document.documentElement.style.setProperty('--secondary-color', '#40537d');
+        return
+      }
+      document.documentElement.style.setProperty('--secondary-color', '#778899');
+      document.documentElement.style.setProperty('--primary-color', '#2F4F4F');
+      document.documentElement.style.setProperty('--text-color', '#000');
+      document.documentElement.style.setProperty('--btn-background', '#778899');
+      return
+    })
   }
 });
 </script>

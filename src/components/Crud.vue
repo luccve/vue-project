@@ -1,31 +1,50 @@
 <template>
     <div id="crud">
+        <div class="title">
+            <h1>Adicionar transações</h1>
+        </div>
         <div id="form">
-            <h1>CRUD</h1>
-            <h5>Adicionar o tipo de receita </h5>
-            <select v-model="type" name="custos">
-                <option value="Custo">Custo</option>
-                <option value="Ganho">Ganho</option>
-            </select>
-            <h5>Especifique o tipo da receita </h5>
-            <select v-model="type_especify" name="custos">
-                <option value="Custo Essencial">Custo Essencial</option>
-                <option value="Custos Pessoais">Custos Pessoais</option>
-                <option value="Reserva Financeira">Reserva Financeira</option>
-                <option value="Receita Primaria">Receita Primaria</option>
-                <option value="Receita Secundária">Receita Secundária</option>
-            </select>
-            <h5>Data</h5>
-            <input ref="date_input" id="date" type="date" v-model="entryDate">
-            <h5>Valor $</h5>
-            <input type="text" v-model="valorADD">
-            <h5>Descrição</h5>
-            <input type="text" v-model="desc">
-            <div>MAPA</div>
 
-            <button @click.prevent="addTransaction">Adicionar</button>
+            <div class="section">
+                <label for="type">Adicionar o tipo de receita </label>
+                <select v-model="type" name="type" id="type">
+                    <option value="Custo">Custo</option>
+                    <option value="Ganho">Ganho</option>
+                </select>
+            </div>
+
+            <div class="section">
+                <label for="custos">Especifique o tipo da receita </label>
+                <select v-model="type_especify" name="custos" id="custos">
+                    <option value="Custo Essencial">Custo Essencial</option>
+                    <option value="Custos Pessoais">Custos Pessoais</option>
+                    <option value="Reserva Financeira">Reserva Financeira</option>
+                    <option value="Receita Primaria">Receita Primaria</option>
+                    <option value="Receita Secundária">Receita Secundária</option>
+                </select>
+            </div>
+            <div class="section">
+                <label for="date">Data</label>
+                <input ref="date_input" id="date" type="date" v-model="entryDate">
+            </div>
+            <div class="section">
+                <label for="money">Valor $</label>
+                <input type="text" v-model="valorADD" id="money" name="money">
+            </div>
+            <div class="section">
+                <label for="desc">Descrição</label>
+                <input type="text" v-model="desc" name="desc" id="desc">
+            </div>
+
+
+            <div id="mapa">MAPA</div>
 
         </div>
+
+        <div>
+            <button @click.prevent="addTransaction">Adicionar</button>
+        </div>
+
 
         <div v-if="entry" class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
@@ -52,7 +71,7 @@
                         <td>{{ item.date }}</td>
                         <td>{{ item.desc }}</td>
                         <td>
-                            <a href="#popUp" id="openPopUp" @click="setValue(index)">
+                            <a href="#popUp" @click="setValue(index)">
                                 <font-awesome-icon icon="fa-solid fa-pen-to-square" size="xl" />
                             </a>
                         </td>
@@ -74,36 +93,49 @@
                     <a href="#!" class="closePopUp">X</a>
                 </header>
                 <article>
-                    <div id="form">
+                    <div id="form2">
+                        <div class="section">
+                            <label for="type">Adicionar o tipo de receita </label>
+                            <select v-model="type" name="type" id="type">
+                                <option value="Custo">Custo</option>
+                                <option value="Ganho">Ganho</option>
+                            </select>
+                        </div>
 
-                        <h5>Adicionar o tipo de receita </h5>
-                        <select v-model="type" name="custos">
-                            <option value="Custo">Custo</option>
-                            <option value="Ganho">Ganho</option>
-                        </select>
-                        <h5>Especifique o tipo da receita </h5>
-                        <select v-model="type_especify" name="custos">
-                            <option value="Custos Essencial">Custo Essencial</option>
-                            <option value="Custos Pessoais">Custos Pessoais</option>
-                            <option value="Reserva Financeira">Reserva Financeira</option>
-                            <option value="Receita Primaria">Receita Primaria</option>
-                            <option value="Receita Secundária">Receita Secundária</option>
-                        </select>
-                        <h5>Data</h5>
-                        <input ref="date_input" id="date" type="date" v-model="entryDate">
-                        <h5>Valor $</h5>
-                        <input type="text" v-model="valorADD">
-                        <h5>Descrição</h5>
-                        <input type="text" v-model="desc">
-                        <div>MAPA</div>
+                        <div class="section">
+                            <label for="custos">Especifique o tipo da receita </label>
+                            <select v-model="type_especify" name="custos" id="custos">
+                                <option value="Custo Essencial">Custo Essencial</option>
+                                <option value="Custos Pessoais">Custos Pessoais</option>
+                                <option value="Reserva Financeira">Reserva Financeira</option>
+                                <option value="Receita Primaria">Receita Primaria</option>
+                                <option value="Receita Secundária">Receita Secundária</option>
+                            </select>
+                        </div>
+                        <div class="section">
+                            <label for="date">Data</label>
+                            <input ref="date_input" id="date" type="date" v-model="entryDate">
+                        </div>
+                        <div class="section">
+                            <label for="money">Valor $</label>
+                            <input type="text" v-model="valorADD" id="money" name="money">
+                        </div>
+                        <div class="section">
+                            <label for="desc">Descrição</label>
+                            <input type="text" v-model="desc" name="desc" id="desc">
+                        </div>
 
-                        <button href='#!' @click="editTransacations()"><a href="#!"
-                                class="closePopUpOutSide"></a>Alterar</button>
 
+                        <div id="mapa">
+
+                        </div>
+                        <div>
+                            <button href='#!' @click="editTransacations()"><a href="#!" class=""></a>Alterar</button>
+                        </div>
                     </div>
                 </article>
             </div>
-            <a href="#!" class="closePopUpOutSide"></a>
+
         </aside>
 
     </div>
@@ -112,13 +144,17 @@
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue'
 import { transaction, getAllTransaction, removeTransaction, editTransaction } from '@/services/api';
-import { getAuth } from '@firebase/auth';
 
 
 export default defineComponent({
     name: 'Crud',
     props: { uid: String },
-
+    components: {},
+    setup() {
+        const center = { lat: 40.689247, lng: -74.044502 };
+        const markerOptions = { position: center, label: "L", title: "LADY LIBERTY" };
+        return { center, markerOptions };
+    },
     data() {
         const entryDate = ref("");
         const valorADD = ref("");
@@ -165,7 +201,7 @@ export default defineComponent({
     },
     methods: {
         clear() {
-            this.user_uid = ""
+
             this.type = ""
             this.type_especify = ""
             this.entryDate = ""
@@ -173,11 +209,11 @@ export default defineComponent({
             this.desc = ""
 
         },
-        addTransaction() {
+        async addTransaction() {
 
             if (this.type && this.entryDate && this.valorADD && this.desc) {
                 try {
-                    transaction({
+                    await transaction({
                         uid: this.user_uid,
                         type: this.type,
                         type_especify: this.type_especify,
@@ -188,7 +224,7 @@ export default defineComponent({
                         longitude: "",
 
                     })
-                    alert('Registro Adicionado')
+
                     this.clear()
                     return
                 } catch (error) {
@@ -237,9 +273,9 @@ export default defineComponent({
                 this.fethList()
             }
         },
-        remove(index: number) {
+        async remove(index: number) {
             try {
-                removeTransaction(this.transactions[index])
+                await removeTransaction(this.transactions[index])
             } catch (error) {
                 console.log(error)
             } finally {
@@ -268,25 +304,117 @@ export default defineComponent({
 </script>
 
 <style scoped>
+#lista table tr {
+    color: var(--text-color) !important;
+    font-weight: 600;
+}
+
+#lista {
+    border-radius: 14px;
+    background-color: var(--btn-background) !important;
+    width: 80%;
+    height: 30%;
+    overflow-y: scroll;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
 a {
     cursor: pointer;
 
 }
 
 #crud {
-    display: block;
-    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 90vh;
+    background-color: var(--hover);
+    color: var(--text-color);
+    border-radius: 13px;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    align-items: center;
 
+
+}
+
+button {
+    cursor: pointer;
+    font-weight: 700;
+    transition: all .2s;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: #cfef00;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin: 20px 0;
+}
+
+button:hover {
+    background: #c4e201;
+}
+
+button>svg {
+    width: 34px;
+    margin-left: 10px;
+    transition: transform .3s ease-in-out;
+}
+
+button:hover svg {
+    transform: translateX(5px);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5px 0;
+}
+
+.section input,
+select {
+    border-radius: 5px;
+
+    width: 80%;
+}
+
+.section label {
+    text-align: flex-start;
+    align-items: flex-start;
+    font-weight: 600
+}
+
+.section input,
+select::placeholder {
+    text-align: center;
 }
 
 #form {
-    display: block;
-    margin: 0 auto;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    background-color: var(--primary-color);
+    border-radius: 13px;
+    overflow-y: scroll;
 }
 
 h1 {
-    color: #ffffff;
-    padding: 1em;
+    color: var(--text-color);
+    padding: 0.1em;
 }
 
 #openPopUp {
@@ -310,6 +438,13 @@ a#openPopUp:hover {
     background-color: #1abc9e;
 }
 
+#form2 {
+    height: 100vh;
+
+}
+
+
+
 .popup {
     position: fixed;
     top: -100vh;
@@ -319,7 +454,6 @@ a#openPopUp:hover {
     width: 100vw;
     height: 100vh;
     opacity: 0;
-
     -webkit-transition: opacity 0.35s ease;
     -moz-transition: opacity 0.35s ease;
     -o-transition: opacity 0.35s ease;
@@ -328,6 +462,7 @@ a#openPopUp:hover {
 
 .popup .popUpContainer {
     width: 100%;
+    height: 50vh;
     max-width: 500px;
     position: fixed;
     /* To avoid scroll to target */
@@ -341,12 +476,13 @@ a#openPopUp:hover {
     /* Trick to properly center the element by using negative 
   1/2 length of element as margin left and top */
     margin-left: -250px;
-    background-color: #ffffff;
+    background-color: var(--primary-color);
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     z-index: 9999999;
+
 }
 
 .popup h2 {
@@ -362,9 +498,17 @@ a#openPopUp:hover {
 }
 
 .popup article {
-    height: 300px;
-    background-color: #e67e22;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: var(--primary-color);
 }
+
+
+.popup article button {
+
+    margin: 1rem auto;
+}
+
 
 /* The cancel button on popup dialog */
 .popup a.closePopUp {
@@ -407,12 +551,16 @@ a#openPopUp:hover {
     transition: top 0.35s ease;
 }
 
-@media (max-width: 796px) {
+@media (max-width: 1050px) {
     .popup .popUpContainer {
         width: 90%;
         max-width: none;
         left: 5%;
         margin-left: 0;
+    }
+
+    input {
+        width: 90%;
     }
 
     .popup ul {
@@ -425,6 +573,15 @@ a#openPopUp:hover {
         -moz-transition: top 0.35s ease;
         -o-transition: top 0.35s ease;
         transition: top 0.35s ease;
+    }
+
+    #lista {
+        font-size: 10px;
+        width: 90%;
+    }
+
+    #crud {
+        width: 80vw;
     }
 }
 </style>

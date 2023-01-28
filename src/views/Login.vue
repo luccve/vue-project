@@ -45,6 +45,7 @@ import router from '@/router';
 import { useRouter } from 'vue-router';
 import MenuBar from '@/components/menuBar.vue';
 import FooterBar from '@/components/FooterBar.vue';
+import { insertUser } from '@/services/api';
 
 
 export default defineComponent({
@@ -112,7 +113,15 @@ export default defineComponent({
             const provider = new GoogleAuthProvider();
             // eslint-disable-next-line 
             signInWithPopup(getAuth(), provider).then((result) => {
-
+                insertUser(
+                    {
+                        displayName: result.user.displayName,
+                        email: result.user.email,
+                        photoURL: "https://source.unsplash.com/random/151x151/",
+                        sexo: "",
+                        uid: result.user.uid,
+                    }
+                )
                 router.push(`/Painel/${result.user.uid}`);
             }).catch((error) => {
                 alert(error.message)

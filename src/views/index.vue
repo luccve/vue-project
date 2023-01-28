@@ -8,8 +8,8 @@
                     <div class="col-sm-12 col-md-6 m-auto">
                         <div class="lead m-auto">
                             <Title text="Em busca de CRÉDITO?" />
-                            <input type="text" placeholder="insira seu e-mail">
-                            <button>ENVIAR</button>
+                            <input type="text" v-model="emailInput" placeholder="insira seu e-mail">
+                            <button @click.prevent="Send">ENVIAR</button>
                             <br>
                             <br>
                             <p class="texto-f">Estamos atuando no mercado financeiro a décadas como intermediários no
@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import menuBar from "@/components/menuBar.vue";
 import FooterBar from '@/components/FooterBar.vue';
 
@@ -63,13 +63,23 @@ import Title from '@/components/Title.vue'
 
 export default defineComponent({
 
-
     name: 'Index',
     components: {
         FooterBar,
         menuBar,
         Title
     },
+    data() {
+        const emailInput = ref("");
+
+        return { emailInput }
+    },
+    methods: {
+        Send() {
+            return
+
+        }
+    }
 
 });
 

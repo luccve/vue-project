@@ -58,14 +58,14 @@ export default defineComponent({
         register() {
             console.log(this.email);
             createUserWithEmailAndPassword(getAuth(), this.email.trim(), this.password)
-                // eslint-disable-next-line
+
                 .then((data) => {
                     alert("Successfully registered!")
                     insertUser(
                         {
                             displayName: data.user.displayName,
                             email: data.user.email,
-                            photoURL: data.user.photoURL,
+                            photoURL: "https://source.unsplash.com/random/151x151/",
                             sexo: "",
                             uid: data.user.uid,
                         }
@@ -80,6 +80,15 @@ export default defineComponent({
             const provider = new GoogleAuthProvider();
             signInWithPopup(getAuth(), provider).then((result) => {
 
+                insertUser(
+                    {
+                        displayName: result.user.displayName,
+                        email: result.user.email,
+                        photoURL: "https://source.unsplash.com/random/151x151/",
+                        sexo: "",
+                        uid: result.user.uid,
+                    }
+                )
                 router.push(`/Painel/${result.user.uid}`);
             }).catch((error) => {
                 alert(error.message)
