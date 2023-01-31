@@ -17,8 +17,12 @@ type user = {
   uid: string | null;
 };
 
+type emailType = {
+  email: string;
+};
+
 type _id = {
   _id: { $oid: "" };
 };
 
-export { user, transaction, _id };
+export { user, transaction, _id, emailType };

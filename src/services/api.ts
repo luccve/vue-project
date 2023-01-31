@@ -1,4 +1,4 @@
-import { user, transaction, _id } from "../../types";
+import { user, transaction, _id, emailType } from "../../types";
 
 export async function apiCNPJ(cnpj: string) {
   const data = await fetch(
@@ -111,6 +111,19 @@ export async function predictAprove(
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+    }
+  );
+  const object = await data.json();
+  return object;
+}
+
+export async function email(body: emailType) {
+  const data = await fetch(
+    `${process.env.VUE_APP_HOST_VERTICE_BACK_END}/email`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     }
   );
   const object = await data.json();

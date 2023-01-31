@@ -8,8 +8,8 @@
                     <div class="col-sm-12 col-md-6 m-auto">
                         <div class="lead m-auto">
                             <Title text="Em busca de CRÉDITO?" />
-                            <input type="text" v-model="emailInput" placeholder="insira seu e-mail">
-                            <button @click.prevent="Send">ENVIAR</button>
+                            <input type="email" v-model="emailInput" :placeholder="placeholdemail">
+                            <button @click.prevent="sendEmail">ENVIAR</button>
                             <br>
                             <br>
                             <p class="texto-f">Estamos atuando no mercado financeiro a décadas como intermediários no
@@ -58,7 +58,7 @@
 import { defineComponent, ref } from 'vue';
 import menuBar from "@/components/menuBar.vue";
 import FooterBar from '@/components/FooterBar.vue';
-
+import { email } from '@/services/api'
 import Title from '@/components/Title.vue'
 
 export default defineComponent({
@@ -71,17 +71,40 @@ export default defineComponent({
     },
     data() {
         const emailInput = ref("");
+        const placeholdemail = ref("ex@example.com");
 
-        return { emailInput }
+        return { emailInput, placeholdemail }
     },
     methods: {
-        Send() {
-            return
 
+
+        validateEmail(email: string) {
+            // eslint-disable-next-line
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email.toLowerCase());
+        },
+        async sendEmail() {
+            if (this.validateEmail(this.emailInput)) {
+                const response = await email({ email: this.emailInput })
+                alert(response.data)
+                this.emailInput = ""
+                return
+
+            } if (!this.emailInput) {
+                return
+            } else {
+                this.emailInput = ""
+                this.placeholdemail = 'E-mail inválido'
+
+            }
         }
+
+
+
+
     }
 
-});
+})
 
 </script>
 
